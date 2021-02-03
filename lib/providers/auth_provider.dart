@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import '../env.dart';
 import 'dart:convert';
 import '../models/http_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-const _apiKey = 'AIzaSyAB0K1kVifIZLvBYbE_jp29jHcYmH_c3aM';
 
 class Auth with ChangeNotifier {
   String _token;
@@ -33,7 +32,7 @@ class Auth with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=$_apiKey';
+        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=$kAuthApiKey';
     try {
       final response = await http.post(url,
           body: jsonEncode({
